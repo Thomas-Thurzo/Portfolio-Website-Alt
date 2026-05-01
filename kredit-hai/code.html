@@ -1,0 +1,218 @@
+
+<!doctype html>
+<html lang="de" class="h-100">
+
+<head>
+    <title>Kredit Hai</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+
+    <!-- Font Awesome Link -->
+    <script src="https://kit.fontawesome.com/5db21ba9c6.js" crossorigin="anonymous"></script>
+
+     <!-- Google Fonts -->
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+     <link href="https://fonts.googleapis.com/css2?family=League+Gothic&display=swap" rel="stylesheet">
+
+    <!-- CSS, Prism Link -->
+    <link rel="stylesheet" href="css/site.css">
+    <link rel="stylesheet" href="css/prism.css">
+
+    <!-- Favicon Link -->
+    <link rel="icon" type="image/png" href="img/faviconTT.png">
+</head>
+
+<body class="d-flex flex-column h-100">
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand fw-bold logoFont" href="app.html">KREDIT HAI</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+            aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="app.html">App</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="code.html">Programmcode</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" target="_blank" href="https://github.com/Thomas-Thurzo/Kredit-Hai">Git-Repo</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    </nav>
+
+    <!-- Main Sektion -->
+    <main class="flex-shrink-0">
+        <div class="container py-5 px-5 mt-5">
+            <h2 class="border-1 border-bottom border-dark">Der Programmcode für <span class="logoFont">KREDIT HAI</span></h2>
+            <div class="row row-cols-1 row-cols-lg-2">
+                <div class="col-lg-8">
+                    <pre class="line-numbers">
+                        <code class="language-javascript">
+                            
+                            // Formatierung für Euro Währung
+                            let formatter = new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR"});
+
+                            // Start Funktion
+                            function programmStart(){
+                                
+                                let summe = document.getElementById("summeEingabe").value;
+                                let monate = document.getElementById("monateEingabe").value;
+                                let zinsen = document.getElementById("zinsenEingabe").value;
+
+                                // Umwandeln der Eingabewerte in Zahlentypen
+                                summe = parseFloat(summe);
+                                monate = parseInt(monate);
+                                zinsen = parseFloat(zinsen);
+
+                                // Ausgabe Kapitalsumme
+                                document.getElementById("kapitalSummeAusgabe").innerHTML = formatter.format(summe);
+
+                                // Ausgabe monatliche Kosten
+                                document.getElementById("monatlicheKosten").innerHTML = formatter.format(monatlicheKostenBerechnung(summe, monate, zinsen));
+
+                                // Ausgabe Zinsen Total
+                                document.getElementById("zinsenAusgabe").innerHTML = formatter.format(gesamtZinsenBerechnung(summe, monate, zinsen));
+
+                                // Ausgabe Kosten Total
+                                document.getElementById("kostenAusgabe").innerHTML = formatter.format(summe + gesamtZinsenBerechnung(summe, monate, zinsen));
+                            
+                                // Berechnung und Ausgabe Table
+                                displayTable(summe, monate, zinsen, monatlicheKosten);  
+                            }
+
+                            // Berechnung für die monatlichen Kosten
+                            function monatlicheKostenBerechnung(summe, monate, zinsen){
+                                let monatlicheKosten = summe * (zinsen / 1200) / (1 - Math.pow((1 + zinsen / 1200), -monate));
+
+                                return monatlicheKosten;
+                            }
+
+                            // Berechnung für die gesammten Zinsen
+                            function gesamtZinsenBerechnung(summe, monate, zinsen){
+
+                                // Variablen
+                                let monatlicheKosten = monatlicheKostenBerechnung(summe, monate, zinsen);
+                                let kapitalRückzahlung = monatlicheKosten;
+                                let zinsenRückzahlung = summe * zinsen / 1200;
+                                let totalZinsen = 0; 
+
+                                for (let index = 1; index <= monate; index++) {
+                                    zinsenRückzahlung = (summe * zinsen / 1200);
+                                    kapitalRückzahlung = (monatlicheKosten - zinsenRückzahlung);
+                                    summe = (summe - kapitalRückzahlung);
+                                    totalZinsen = totalZinsen + zinsenRückzahlung;       
+                                }
+                                return totalZinsen;
+                            }
+
+                            // Ausgabe Table
+                            function displayTable(summe, monate, zinsen){
+                                
+                                // Variablen
+                                let monatlicheKosten = monatlicheKostenBerechnung(summe, monate, zinsen);
+                                let kapitalRückzahlung = monatlicheKosten;
+                                let zinsenRückzahlung = summe * zinsen / 1200;
+                                let totalZinsen = 0; 
+                                let tableRow = "";
+                                let monateSpalte = "";
+                                let montalicheZahlungenSpalte = "<td>" + formatter.format(monatlicheKosten) + "</td>";
+                                let kapitalRückzahlungSpalte = "";
+                                let zinsenRückzahlungSpalte = "";
+                                let totalZinsenSpalte = "";
+                                let summeSpalte = "";
+                                
+                                for (let index = 1; index <= monate; index++) {
+
+                                    // Berechnungen
+                                    zinsenRückzahlung = (summe * zinsen / 1200);
+                                    kapitalRückzahlung = (monatlicheKosten - zinsenRückzahlung);
+                                    summe = (summe - kapitalRückzahlung);
+                                    totalZinsen = totalZinsen + zinsenRückzahlung;
+
+                                    // Erzeugen der einzelnen Spalten
+                                    monateSpalte = "<td>" + index + "</td>";
+                                    kapitalRückzahlungSpalte = "<td>" + formatter.format(kapitalRückzahlung) + "</td>";
+                                    zinsenRückzahlungSpalte = "<td>" + formatter.format(zinsenRückzahlung) + "</td>";
+                                    totalZinsenSpalte = "<td>" + formatter.format(totalZinsen) + "</td>";
+                                    summeSpalte = "<td>" + formatter.format(summe) + "</td>";
+                                    
+                                    // Erzeugen der Reihe
+                                    tableRow += "<tr>" + monateSpalte + montalicheZahlungenSpalte + kapitalRückzahlungSpalte + zinsenRückzahlungSpalte + totalZinsenSpalte + summeSpalte + "</tr>";
+                                    
+                                    // Ausgabe der Reihe
+                                    document.getElementById("tableAusgabe").innerHTML = tableRow;                                 
+                                }
+                            }
+
+
+                        </code>
+                    </pre>
+                </div>
+                <div class="col-lg-4">
+                    <h5>KREDIT HAI</h5>
+                    <p>Das Programm setzt sich aus 4 Funktionen zusammen.</p>
+                    <p>Der Start Funktion. Hier werden alle anderen Funktionen aufgerufen
+                        und es ist der Starpunkt des Programms.</p>
+                    <p>Zwei Berechnungs Funktionen für die Zinsen Berechnungen.</p>
+                    <p>Die letzte Funktion ist die Ausgabe Funktion die alles anzeigt und ausgibt.</p>
+                </div>
+            </div>
+    
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer mt-auto py-3 sticky-footer">
+        <div class="container-fluid">
+            <div class="row row-cols-1 row-cols-lg-2 gy-2">
+               <div class="col text-light">
+                   <div class="text-muted">&copy Copyright 2022 </div>
+                   <div>Thomas Thurzo | thomas.thurzo@gmail.com</div>              
+               </div>   
+               <div class="col d-flex align-items-center justify-content-lg-end">
+                    <div class="row">
+                        <div class="col social" title="LinkedIn"><a href="https://www.linkedin.com/in/thomas-thurzo-7b79a9123/" target="_blank"><i class="fab fa-linkedin fa-2x"></i></a></div>
+                        <div class="col social" title="GitHub"><a href="https://github.com/Thomas-Thurzo/" target="_blank"><i class="fab fa-github fa-2x"></i></a></div>
+                        <div class="col social" title="Twitter"><a href="https://twitter.com/home" target="_blank"><i class="fab fa-twitter fa-2x"></i></a></div>
+                    </div>
+               </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous">
+    </script>
+
+    <!-- Prism JS -->
+    <script src="js/prism.js"></script>
+    <script>
+        Prism.plugins.NormalizeWhitespace.setDefaults({
+            'remove-trailing': true,
+            'remove-indent': true,
+            'left-trim': true,
+            'right-trim': true})
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,185 @@
+
+<!doctype html>
+<html lang="de" class="h-100">
+
+<head>
+    <title>TACO CAT</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+
+    <!-- Font Awesome Link -->
+    <script src="https://kit.fontawesome.com/5db21ba9c6.js" crossorigin="anonymous"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hurricane&display=swap" rel="stylesheet">
+
+    <!-- CSS, Prism Link -->
+    <link rel="stylesheet" href="css/site.css">
+    <link rel="stylesheet" href="css/prism.css">
+
+    <!-- Favicon Link -->
+    <link rel="icon" type="image/png" href="img/faviconTT.png">
+</head>
+
+<body class="d-flex flex-column h-100">
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand logoFont" href="app.html">TACO CAT</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+            aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="app.html">App</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="code.html">Programmcode</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" target="_blank" href="https://github.com/Thomas-Thurzo/Taco-Cat">Git-Repo</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    </nav>
+
+    <!-- Main Sektion -->
+    <main class="flex-shrink-0">
+        <div class="container py-5 px-5 mt-5">
+            <h2 class="border-1 border-bottom border-dark">Der Programmcode für <span class="logoFont">TACO CAT</span></h2>
+            <div class="row row-cols-1 row-cols-lg-2">
+                <div class="col-lg-8">
+                    <pre class="line-numbers">
+                        <code class="language-javascript">
+                            
+                            // Start Funktion
+                            function startFunktion(){
+
+                                // Einlesen des Wortes
+                                let eingabeText = document.getElementById("eingabeText").value;
+
+                                // Check ob etwas eingeben wurde
+                                if (eingabeText != ""){
+                                    // Aufrufen der Logik Funktion 
+                                let ergebnis = logikFunktion(eingabeText);
+
+                                    // Aufrufen der Display Funktion
+                                    displayFunktion(ergebnis);
+                                }  
+                                else{
+                                    alert("Bitte ein Wort eingeben!");
+                                }
+                            }
+
+                            // Logik Funktion, Check ob die Eingabe ein Palindrom ist
+                            function logikFunktion(eingabeText){
+
+                                // Variablen
+                                let ergebnis = "Es handelt sich bei dem Wort " + eingabeText + " um kein Palindrom!";
+                                let wortReverse = "";
+                                let regex = /[^a-z0-9]/gi;
+
+                                // Entfernen von Sonderzeichen und Leerzeichen
+                                eingabeText = eingabeText.replace(regex,"");
+
+                                // Das Wort umdrehen
+                                for (let index = eingabeText.length - 1; index >= 0; index--) {
+                                    wortReverse = wortReverse + eingabeText[index];      
+                                }
+
+                                // Alle Buchstaben zu Großbuchstaben umwandeln
+                                eingabeText = eingabeText.toLowerCase();
+                                wortReverse = wortReverse.toLowerCase();
+
+                                // Überprüfung auf Gleicheit
+                                if(eingabeText == wortReverse){
+                                    ergebnis = "Das Wort " + eingabeText + " ist ein Palindrom!"
+                                }
+
+                                // Rückgabe des Ergebnises
+                                return ergebnis;
+                            }
+
+                            // Display Funktion
+                            function displayFunktion(ergebnis){
+
+                                document.getElementById("ausgabe").innerHTML = ergebnis;
+
+                                document.getElementById("alert").classList.remove("invisible");
+                            }
+
+                            // Clear Funktion, zum löschen der Konsole
+                            function clearFunktion(){
+
+                                document.getElementById("eingabeText").value = "";
+
+                                document.getElementById("alert").classList.add("invisible");
+                            }
+
+                        </code>
+                    </pre>
+                </div>
+                <div class="col-lg-4">
+                    <h5 class="logoFont">TACO CAT</h5>
+                    <p>Das Programm besteht aus 4 Funktionen.</p>
+                    <p>Eine Start Funktion, eine Logik Funktion, eine Display Funktion,
+                        und eine Funktion zum Zurücksetzen des Eingabeformulars.
+                    </p>
+                </div>
+            </div>
+    
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer mt-auto py-3 sticky-footer">
+        <div class="container-fluid">
+            <div class="row row-cols-1 row-cols-lg-2 gy-2">
+               <div class="col text-light">
+                   <div class="text-muted">&copy Copyright 2022 </div>
+                   <div>Thomas Thurzo | thomas.thurzo@gmail.com</div>              
+               </div>   
+               <div class="col d-flex align-items-center justify-content-lg-end">
+                    <div class="row">
+                        <div class="col social" title="LinkedIn"><a href="https://www.linkedin.com/in/thomas-thurzo-7b79a9123/" target="_blank"><i class="fab fa-linkedin fa-2x"></i></a></div>
+                        <div class="col social" title="GitHub"><a href="https://github.com/Thomas-Thurzo/" target="_blank"><i class="fab fa-github fa-2x"></i></a></div>
+                        <div class="col social" title="Twitter"><a href="https://twitter.com/home" target="_blank"><i class="fab fa-twitter fa-2x"></i></a></div>
+                    </div>
+               </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous">
+    </script>
+
+    <!-- Prism JS -->
+    <script src="js/prism.js"></script>
+    <script>
+        Prism.plugins.NormalizeWhitespace.setDefaults({
+            'remove-trailing': true,
+            'remove-indent': true,
+            'left-trim': true,
+            'right-trim': true})
+    </script>
+
+</body>
+
+</html>

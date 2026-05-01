@@ -1,0 +1,179 @@
+
+<!doctype html>
+<html lang="de" class="h-100">
+
+<head>
+    <title>HUNDO</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+
+    <!-- Font Awesome Link -->
+    <script src="https://kit.fontawesome.com/5db21ba9c6.js" crossorigin="anonymous"></script>
+
+    <!-- CSS, Prism Link -->
+    <link rel="stylesheet" href="css/site.css">
+    <link rel="stylesheet" href="css/prism.css">
+
+    <!-- Google Fonts für Racing Sans One -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap" rel="stylesheet">
+
+    <!-- Favicon Link -->
+    <link rel="icon" type="image/png" href="img/faviconTT.png">
+</head>
+
+<body class="d-flex flex-column h-100">
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand logoFont" href="app.html">HUNDO</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+            aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="app.html">App</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="code.html">Programmcode</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" target="_blank" href="https://github.com/Thomas-Thurzo/Hundo">Git-Repo</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    </nav>
+
+    <!-- Main Sektion -->
+    <main class="flex-shrink-0">
+        <div class="container py-5 px-5 mt-5">
+            <h2 class="border-1 border-bottom border-dark">Der Programmcode für <span class="logoFont">HUNDO</span></h2>
+            <div class="row row-cols-1 row-cols-lg-2">
+                <div class="col-lg-8">
+                    <pre class="line-numbers">
+                        <code class="language-javascript">
+                         
+                            // Start oder Controller Funktion
+                            function getValues(){
+
+                                // get values
+                                let startWert = document.getElementById("startWert").value;
+                                let endWert = document.getElementById("endWert").value;
+
+                                // parse values into integer
+                                startWert = parseInt(startWert);
+                                endWert = parseInt(endWert);
+
+                                // check
+                                if(startWert >= endWert){
+                                    alert("Fehler: Startwert darf nich größer als der Entdwert sein!")
+                                }
+
+                                // display
+                                let zahlen = generateNumbers(startWert, endWert);
+                                displayNumbers(zahlen);
+
+                            }
+
+                            // Logik Funktion
+                            function generateNumbers(startWert, endWert){
+
+                                let zahlen = [];
+
+                                for (let index = startWert; index <= endWert; index++) {       
+                                    zahlen.push(index);
+                                }
+
+                                return zahlen;
+                            }
+
+                            // Ausgabe oder Display Funktion
+                            function displayNumbers(zahlen){
+
+                                let templateRows = "";
+
+                                for (let index = 0; index < zahlen.length; index++) {   
+                                    
+                                    let className = "gerade";
+                                    let wert = zahlen[index];
+
+                                    if(wert % 2 == 0){
+                                        className = "gerade"
+                                    }
+                                    else{
+                                        className = "ungerade"
+                                    }
+                            
+                                    templateRows += `tr td class="${className}"` + wert + `td tr`;      
+                                }
+
+                                document.getElementById("ergebnis").innerHTML = templateRows;
+                            }
+
+                        </code>
+                    </pre>
+                </div>
+                <div class="col-lg-4">
+                    <h5 class="logoFont">HUNDO</h5>
+                    <p>Der Programmcode besteht aus drei Funktionen.  </p>
+                    <p>Eine Funktion (Start oder Controller Funktion) um die Daten aus den Eingabefeldern
+                        zu holen und auf die korrekte Eingabe hin zu überprüfen. </p>
+                    <p>Ein Funktion (Logikfunktion) um die Daten zu generieren.</p>
+                    <p>Und eine Funtkion (Displayfunktion) die für die Ausgabe zuständig ist.</p>
+                </div>
+            </div>
+    
+        </div>
+    </main>
+
+     <!-- Footer -->
+     <footer class="footer mt-auto py-3 sticky-footer">
+        <div class="container-fluid">
+            <div class="row row-cols-1 row-cols-lg-2 gy-2">
+               <div class="col text-light">
+                   <div class="text-muted">&copy Copyright 2022 </div>
+                   <div>Thomas Thurzo | thomas.thurzo@gmail.com</div>              
+               </div>   
+               <div class="col d-flex align-items-center justify-content-lg-end">
+                    <div class="row">
+                        <div class="col social" title="LinkedIn"><a href="https://www.linkedin.com/in/thomas-thurzo-7b79a9123/" target="_blank"><i class="fab fa-linkedin fa-2x"></i></a></div>
+                        <div class="col social" title="GitHub"><a href="https://github.com/Thomas-Thurzo/" target="_blank"><i class="fab fa-github fa-2x"></i></a></div>
+                        <div class="col social" title="Twitter"><a href="https://twitter.com/home" target="_blank"><i class="fab fa-twitter fa-2x"></i></a></div>
+                    </div>
+               </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous">
+    </script>
+
+    <!-- Prism JS -->
+    <script src="js/prism.js"></script>
+    <script>
+        Prism.plugins.NormalizeWhitespace.setDefaults({
+            'remove-trailing': true,
+            'remove-indent': true,
+            'left-trim': true,
+            'right-trim': true})
+    </script>
+
+</body>
+
+</html>

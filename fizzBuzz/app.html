@@ -1,0 +1,149 @@
+
+<!doctype html>
+<html lang="de" class="h-100">
+
+<head>
+    <title>FIZZ-BUZZ</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+
+    <!-- Font Awesome Link -->
+    <script src="https://kit.fontawesome.com/5db21ba9c6.js" crossorigin="anonymous"></script>
+
+    <!-- CSS Link -->
+    <link rel="stylesheet" href="css/site.css">
+
+    <!-- Favicon Link -->
+    <link rel="icon" type="image/png" href="img/faviconTT.png">
+</head>
+
+<body class="d-flex flex-column h-100">
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">FIZZ-BUZZ</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+            aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="app.html">App</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="code.html">Programmcode</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" target="_blank" href="https://github.com/Thomas-Thurzo/Fizz-Buzz">Git-Repo</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    </nav>
+
+    <!-- Main Sektion -->
+    <main class="flex-shrink-0">
+        <div class="container mt-5">
+            <div class="row row-cols-1 row-cols-lg-2">
+
+                <!-- Col 1 -->
+                <div class="col">
+                    <h1 class="display-5 fw-bold lh-1 mb-3">FIZZ-BUZZ Ein Coding Projekt</h1>
+                    <h4 class="lead">Eine JavaScript Coding Übung. Schreibe ein Programm das Nummern
+                        von 1 bis 100 anzeigt. Für eine gewünschte Zahl und das jeweilige vielfache dieser Zahl
+                         soll "Fizz" angezeigt werden und für eine andere gewünschte Zahl und 
+                         das jeweilige vielfache soll "Buzz" angezeigt werden. Für die Zahlen die das vielfache
+                         der ersten und der zweiten Zahl sind soll "Fizz-Buzz" angezeigt werden. 
+                </div>
+
+                <!-- Col 2 -->
+                <div class="col">
+
+                    <!-- Zahlen Eingabe -->
+                    <form class="row gy-3">
+                        <div class="col-6">
+                            <h5>Fizz Zahl eingeben:</h5>
+                            <input type="number" id="fizzZahl" class="form-control" min="0" max="100" value=3 aria-label="Fizz Zahl">
+                        </div>
+                        <div class="col-6">
+                            <h5>Buzz Zahl eingeben:</h5>
+                            <input type="number" id="buzzZahl" class="form-control" min="0" max="100" value=5 aria-label="Buzz Zahl">
+                        </div>
+                        <div class="col d-flex justify-content-end">
+                            <button id="btnSubmit" type="button" class="btn btn-info btn-lg">Fizz-Buzz</button>
+                        </div>
+                    </form>
+
+                    <!-- Zahlen Ausgabe -->
+                    <h2 class="mt-5 mb-3 border-bottom border-2">Ergebnis:</h2>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-sm">
+                            <tbody id="ergebnis">
+
+                                <!-- Ergebnis kommt hierher -->
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer mt-auto py-3 sticky-footer">
+        <div class="container-fluid">
+            <div class="row row-cols-1 row-cols-lg-2 gy-2">
+               <div class="col text-light">
+                   <div class="text-muted">&copy Copyright 2022 </div>
+                   <div>Thomas Thurzo | thomas.thurzo@gmail.com</div>              
+               </div>   
+               <div class="col d-flex align-items-center justify-content-lg-end">
+                    <div class="row">
+                        <div class="col social" title="LinkedIn"><a href="https://www.linkedin.com/in/thomas-thurzo-7b79a9123/" target="_blank"><i class="fab fa-linkedin fa-2x"></i></a></div>
+                        <div class="col social" title="GitHub"><a href="https://github.com/Thomas-Thurzo/" target="_blank"><i class="fab fa-github fa-2x"></i></a></div>
+                        <div class="col social" title="Twitter"><a href="https://twitter.com/home" target="_blank"><i class="fab fa-twitter fa-2x"></i></a></div>
+                    </div>
+               </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Template -->
+    <template id="fizzBuzzTemplate">
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </template>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous">
+    </script>
+    <script src="js/site.js"></script>
+
+    <!-- JavaScript -->
+    <script src="js/site.js"></script>
+    <script>
+        document.getElementById("btnSubmit").addEventListener("click", getValues);
+    </script>
+
+</body>
+
+</html>
